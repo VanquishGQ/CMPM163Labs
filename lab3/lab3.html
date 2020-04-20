@@ -20,8 +20,16 @@
 		camera.position.z = 5;
 
 		// setup the cube
-		var geometry = new THREE.BoxGeometry(2, 2, 3);
 		var geometry = new THREE.BoxGeometry(1, 1, 1);
+		var geometry3 = new THREE.BoxGeometry(1, 1, 1);
+
+		var geometry4 = new THREE.BoxGeometry();
+    var material4 = new THREE.MeshPhongMaterial( { color: 0xdddddd,
+		specular: 0x00ff00, shininess: 30 });
+
+    var cube4 = new THREE.Mesh( geometry4, material4 );
+		//cube4.position.y = 2;
+    scene.add(cube4);
 
 		var material = new THREE.MeshPhysicalMaterial({
 			clearcoat: 1.0,
@@ -37,9 +45,10 @@
 		});
 
 		var cube = new THREE.Mesh(geometry, material);
+		cube.position.y = 2;
 		scene.add(cube);
 
-		var cube2 = new THREE.Mesh(geometry, material3);
+		var cube2 = new THREE.Mesh(geometry3, material3);
 		cube2.position.x = -5;
 		scene.add(cube2);
 
@@ -47,14 +56,6 @@
 		var light = new THREE.PointLight(0xffffff, 1, 1000);
 		light.position.set(10, 10, 10);
 		scene.add(light);
-
-		var light1 = new THREE.PointLight(0xff0040, 2, 1000);
-		light1.position.set(20, 20, 10);
-		scene.add(light1);
-
-		var light2 = new THREE.PointLight(0xff0040, 2, 1000);
-		light2.position.set(-10, -10, -10);
-		scene.add(light2);
 
 		var geometry1, material1, mesh1;
 
@@ -200,6 +201,9 @@
 		requestAnimationFrame(animate);
 		cube.rotateX(0.01);
 		cube.rotateY(0.01);
+
+		cube4.rotateX(0.01);
+		cube4.rotateY(0.01);
 
 		cube2.rotateX(0.01);
 		cube2.rotateY(0.01);
