@@ -27,13 +27,23 @@ var texture = THREE.ImageUtils.loadTexture("156.jpg");
       			var cube = new THREE.Mesh(geometry, material);
      			scene.add(cube);
 
+					var cube2 = new THREE.Mesh(geometry, material);
+scene.add(cube2);
+cube2.position.x -= 2;
+
+
 			// add the light
 			var light = new THREE.PointLight(0xffffff, 1, 1000);
-			light.position.set(10, 10, 10);
+			//light.position.set(10, 10, 10);
 			scene.add(light);
+
+			var t = 0;
 
 			function animate() {
 				requestAnimationFrame(animate);
+				t += 0.02;
+				light.position.x = 10*Math.cos(t) + 0;
+    		light.position.z = 10*Math.sin(t) + 0;
 				renderer.render(scene, camera);
 			}
 			animate();
