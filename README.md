@@ -15,7 +15,7 @@ Cubes (from left to right):
 * Cube2: Cube made by following google doc part 1 instructions, it used texture No.156
 * Cube3: Same as Cube2 but it has a nomral map on it
 * Cube4: The final cube, it has a tiling texture onit, it used texture No.176<br/>
-I implmented tiling effect by first detect the position of current uv for exmple, if its x and y are both larger than 0.5 then it means current coordinates are located on the top right corner of the cube. Then I shrink texture and put it on the top right corner by doing some calculation to the coordinates.
+I implmented tiling effect by first detect the position of current uv, for exmple, if its x and y are both larger than 0.5 then it means current coordinates are located on the top right corner of the cube. Then I shrink texture down to the bottom-left corner and put it on the top right corner by doing some calculation to its coordinates.
 * Cube5: Cube made by following google doc part 2 instructions, it used texture No.176
 <br/>
 Video of lab4: https://drive.google.com/file/d/1OD4BAGuFC-aD6Y-jRjUCW3LvKVBe8GDL/view?usp=sharing<br/>
