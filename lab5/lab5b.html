@@ -41,8 +41,7 @@
 			geo.vertices.push(particle.position)
     }
 
-		var sprite = new THREE.TextureLoader().load('disc.png');
-		const mat = new THREE.PointsMaterial({color:0xffffff,size: 0.5, map: sprite});
+		const mat = new THREE.PointsMaterial({color:0xffffff,size: 0.5});
 		mesh = new THREE.Points(geo,mat);
 		mesh.position.z = -4;
 		scene.add(mesh);
@@ -53,8 +52,10 @@
 			particles.forEach(p => {
 					p.velocity.add(p.acceleration);
 					p.position.add(p.velocity);
-					p.velocity.z += Math.random() * .01;
 					p.velocity.x += p.acceleration.x;
+					p.velocity.y += p.acceleration.y;
+					p.position.x += p.velocity.x;
+
 			});
 
 			mesh.geometry.verticesNeedUpdate = true;
