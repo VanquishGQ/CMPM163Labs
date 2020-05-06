@@ -21,6 +21,10 @@ I implmented tiling effect by first detect the position of current uv, for exmpl
 Video of lab4: https://drive.google.com/file/d/1OD4BAGuFC-aD6Y-jRjUCW3LvKVBe8GDL/view?usp=sharing
 
 ## Lab5
+### Part1
+Video: https://drive.google.com/file/d/189_4gfpzzYaM-OwSxiXlFXUyUaA7PAfo/view?usp=sharing <br/>
+I added trail for particles and grident color to the particles. Then I added force to their X-axis so they can look like they are blowing away by wind. At last, I gave them a gravity property give them a more dynamic feelings.
+### Part2
 a video of moving around the static particles that change colors<br/>
 https://drive.google.com/file/d/1kaHS403wQz9UDjMEQvakuZBoOpqm6BK3/view?usp=sharing <br/>
 a video of explosion of particles<br/>
