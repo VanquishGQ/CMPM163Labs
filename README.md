@@ -18,4 +18,12 @@ Cubes (from left to right):
 I implmented tiling effect by first detect the position of current uv, for exmple, if its x and y are both larger than 0.5 then it means current coordinates are located on the top right corner of the cube. Then I shrink texture down to the bottom-left corner and put it on the top right corner by doing some calculation to its coordinates.
 * Cube5: Cube made by following google doc part 2 instructions, it used texture No.176
 <br/>
-Video of lab4: https://drive.google.com/file/d/1OD4BAGuFC-aD6Y-jRjUCW3LvKVBe8GDL/view?usp=sharing<br/>
+Video of lab4: https://drive.google.com/file/d/1OD4BAGuFC-aD6Y-jRjUCW3LvKVBe8GDL/view?usp=sharing
+
+## Lab5
+a video of moving around the static particles that change colors<br/>
+https://drive.google.com/file/d/1kaHS403wQz9UDjMEQvakuZBoOpqm6BK3/view?usp=sharing <br/>
+a video of explosion of particles<br/>
+https://drive.google.com/file/d/1xkJ9WhWI1J1lvsmPC8BLlAslkvuTfGXa/view?usp=sharing <br/>
+a video of your custom particle animation<br/>
+https://drive.google.com/file/d/1HQt_soB86Adcrh5yPmFFJOGrY3AIbXp_/view?usp=sharing <br/>
