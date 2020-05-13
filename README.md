@@ -31,3 +31,8 @@ a video of explosion of particles<br/>
 https://drive.google.com/file/d/1xkJ9WhWI1J1lvsmPC8BLlAslkvuTfGXa/view?usp=sharing <br/>
 a video of your custom particle animation<br/>
 https://drive.google.com/file/d/1HQt_soB86Adcrh5yPmFFJOGrY3AIbXp_/view?usp=sharing <br/>
+
+## Lab6
+### Part2
+![Image of Part2](https://i.ibb.co/3y7mGWk/Screen-Shot-2020-05-12-at-7-07-41-PM.png)
+Link: https://www.shadertoy.com/view/WsBBzz
