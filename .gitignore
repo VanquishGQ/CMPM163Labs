@@ -1,2 +1,6 @@
 
 .DS_Store
+.idea/vcs.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/CMPM163Labs.iml
