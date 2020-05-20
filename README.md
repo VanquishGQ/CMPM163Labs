@@ -44,5 +44,4 @@ Link: https://www.shadertoy.com/view/WsBBzz
 ### Part2B
 Link: https://drive.google.com/file/d/1jq9pPNljYu5wrleeqdsPjCbLrunkbzFk/view?usp=sharing
 ### Part2C
-Link: https://drive.google.com/file/d/1UPk2U2i8zrD1JVfvGy1lgfQfUM3yoKb3/view?usp=sharing <br/>
-partner check: My partner finished early than me and he is unreachable when I finished.
+Link: https://drive.google.com/file/d/1UPk2U2i8zrD1JVfvGy1lgfQfUM3yoKb3/view?usp=sharing
