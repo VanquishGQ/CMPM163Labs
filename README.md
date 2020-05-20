@@ -44,4 +44,7 @@ Link: https://www.shadertoy.com/view/WsBBzz
 ### Part2B
 Link: https://drive.google.com/file/d/1jq9pPNljYu5wrleeqdsPjCbLrunkbzFk/view?usp=sharing
 ### Part2C
-Link: https://drive.google.com/file/d/1UPk2U2i8zrD1JVfvGy1lgfQfUM3yoKb3/view?usp=sharing
+Link: https://drive.google.com/file/d/1UPk2U2i8zrD1JVfvGy1lgfQfUM3yoKb3/view?usp=sharing <br />
+Partner check: <br />
+I did Part 1.<br />
+The part that I found most challenging was figuring out how to use the Shader Graph to manipulate the material in such a way to produce the intended effects that I wanted for my scene, such as the snowy mountain tops, or the snowy bushes. The part that I found most interesting was the Shader Graph itself. Being able to manipulate the shader by connecting nodes makes the entire process intuitive and easier to manipulate while also being able to see your changes in realtime.
