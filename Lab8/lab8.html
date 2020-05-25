@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lab 8: Procedural Generation</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+<script src="../three.js-master/build/three.js"></script>
+<script id="vertexShader" type="x-shader/x-vertex">
+			 // code for vertex shader
+			uniform sampler2D heightMap1;
+            varying vec2 vUv;
+
+            void main() {
+                vUv = uv;
+                vec4 heightColor = texture2D(heightMap1, uv);
+                vec3 newPosition = position + normal * 1.0 * heightColor.r;
+                vec4 modelViewPosition = modelViewMatrix * vec4(newPosition, 1.0);
+                gl_Position = projectionMatrix * modelViewPosition;
+            }
+
+		</script>
+
+<script id="fragmentShader" type="x-shader/x-fragment">
+			 // code for fragment shader
+			 uniform sampler2D texture1;
+			 varying vec2 vUv;
+			 void main() {
+				gl_FragColor = texture2D(texture1, vUv);
+			 }
+		</script>
+<script type="module">
+
+    import * as THREE from '../three.js-master/build/three.module.js';
+
+    import { GUI } from '../three.js-master/examples/jsm/libs/dat.gui.module.js';
+    import { OrbitControls } from '../three.js-master/examples/jsm/controls/OrbitControls.js';
+    import { Sky } from '../three.js-master/examples/jsm/objects/Sky.js';
+
+    var camera, controls, scene, renderer;
+
+    var sky, sunSphere;
+
+    var cloudGeo, cloudMaterial;
+    var cloudParticles = [];
+
+    init();
+    render();
+
+    function initSky() {
+
+        // Add Sky
+        sky = new Sky();
+        sky.scale.setScalar( 10000 );
+        scene.add( sky );
+
+        // Add Sun Helper
+        sunSphere = new THREE.Mesh(
+            new THREE.SphereBufferGeometry( 100, 16, 8 ),
+            new THREE.MeshBasicMaterial( { color: 0xffffff } )
+        );
+        sunSphere.position.y = - 200;
+        sunSphere.visible = false;
+        scene.add( sunSphere );
+
+        /// GUI
+
+        var effectController = {
+            turbidity: 10,
+            rayleigh: 2,
+            mieCoefficient: 0.005,
+            mieDirectionalG: 0.8,
+            luminance: 1,
+            inclination: 0.49, // elevation / inclination
+            azimuth: 0.25, // Facing front,
+            sun: ! true
+        };
+
+        var distance = 1000;
+
+        function guiChanged() {
+
+            var uniforms = sky.material.uniforms;
+            uniforms[ "turbidity" ].value = effectController.turbidity;
+            uniforms[ "rayleigh" ].value = effectController.rayleigh;
+            uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
+            uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
+            uniforms[ "luminance" ].value = effectController.luminance;
+
+            var theta = Math.PI * ( effectController.inclination - 0.5 );
+            var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
+
+            sunSphere.position.x = distance * Math.cos( phi );
+            sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+            sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+
+            sunSphere.visible = effectController.sun;
+
+            uniforms[ "sunPosition" ].value.copy( sunSphere.position );
+
+            renderer.render( scene, camera );
+
+        }
+
+
+        guiChanged();
+
+    }
+
+    function init() {
+
+        camera = new THREE.PerspectiveCamera(75,
+            window.innerWidth/window.innerHeight, 0.1, 1000);
+        camera.position.y = -10;
+        camera.position.z = 0;
+        camera.rotation.x = -11.5;
+
+        scene = new THREE.Scene();
+
+        //var helper = new THREE.GridHelper( 10000, 2, 0xffffff, 0xffffff );
+        //scene.add( helper );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+
+        controls = new OrbitControls( camera, renderer.domElement );
+        controls.addEventListener( 'change', render );
+        //controls.maxPolarAngle = Math.PI / 2;
+        controls.enableZoom = false;
+        controls.enablePan = false;
+
+        initSky();
+        var ambient = new THREE.AmbientLight(0x555555);
+        scene.add(ambient);
+        var directionalLight = new THREE.DirectionalLight(0xffeedd);
+        directionalLight.position.set(0,0,1);
+        scene.add(directionalLight);
+
+
+
+        var uniforms = {
+            texture1: { type: "t", value:THREE.ImageUtils.loadTexture("unnamed (2).jpg")},
+            heightMap1: { type: "t",value:THREE.ImageUtils.loadTexture("Sc2wB.jpg")}
+        };
+        var material = new THREE.ShaderMaterial({ uniforms: uniforms,
+            vertexShader: document.getElementById('vertexShader').textContent, fragmentShader: document.getElementById('fragmentShader').textContent});
+
+        var plane = new THREE.Mesh(new THREE.PlaneGeometry(10, 15, 200,
+            200), material);
+        plane.scale.set(25,15,15);
+        plane.position.set(0,-5,-145);
+        plane.rotation.x = -Math.PI / 2;
+        scene.add(plane);
+
+        const light = new THREE.PointLight(0xffffff, 1.0);
+        light.position.set(-10,5,-25);
+        scene.add(light);
+        const light2 = new THREE.PointLight(0xffffff, 1.0);
+        light2.position.set(0,5,-25);
+        scene.add(light2);
+
+        const mat = new THREE.MeshPhongMaterial({color:0x2288ff,
+            Shininess:100, side:THREE.DoubleSide})
+        var p = new THREE.PlaneGeometry(20, 20, 100, 100);
+        var ocean = new THREE.Mesh(p, mat);
+        ocean.position.set(0,-7,-35);
+        ocean.scale.set(15,15,1);
+        ocean.rotation.x =  -Math.PI / 2;
+        scene.add(ocean);
+
+        // PlaneGeometry
+        const mat2 = new THREE.MeshPhongMaterial({color:0x4f4f4f, Shininess:100, side:THREE.DoubleSide});
+        var planeSize = 30;
+        var p = new THREE.PlaneGeometry(planeSize, planeSize, 100, 100);
+        var plane2 = new THREE.Mesh(p, mat2);
+        var planeCenter = new THREE.Vector3(-30,-parseInt(planeSize/4),-planeSize/6);
+        plane2.position.z = planeCenter.z;
+        plane2.position.y = planeCenter.y;
+        plane2.rotation.x = -Math.PI/2;
+        scene.add(plane2);
+
+        // add the lights all around the city
+        /*
+        for(var a = 270; a < 270 * 2; a+=100) {
+            var light3 = new THREE.PointLight(0xffffff, 1, planeSize * 1.5);
+            light3.position.set(
+                planeSize * Math.cos(THREE.MathUtils.degToRad(a)),
+                planeCenter.y + planeSize/2,
+                planeCenter.z + planeSize * Math.sin(THREE.MathUtils.degToRad(a)));
+            scene.add(light3);
+        }*/
+
+        var texture = THREE.ImageUtils.loadTexture("156.jpg");
+        var texture2 = THREE.ImageUtils.loadTexture("157.jpg");
+        var texture3 = THREE.ImageUtils.loadTexture("158.jpg");
+
+
+        for(var r = -planeSize/2; r < planeSize/2; r++) {
+            for(var c = -planeSize/2; c < planeSize/2; c++) {
+                var height = Math.random() * 10;
+                var material2;
+                var geometry = new THREE.BoxGeometry();
+                if (height >= 8) {
+                    material2 = new THREE.MeshPhongMaterial({map: texture});
+                } else if (height >= 5) {
+                    material2 = new THREE.MeshPhongMaterial({map: texture2});
+                } else {
+                    material2 = new THREE.MeshPhongMaterial({map: texture3});
+                }
+                var cube = new THREE.Mesh(geometry, material2);
+                cube.scale.y = height;
+                cube.scale.x = .7;
+                cube.scale.z = .9;
+                cube.position.z = planeCenter.z + c + cube.scale.z/4;
+                cube.position.x = r + cube.scale.x / 2;
+                cube.position.y = planeCenter.y + cube.scale.y / 2;
+
+
+
+                scene.add(cube);
+            }
+        }
+
+
+        let loader = new THREE.TextureLoader();
+        loader.load("smoke.png", function(texture){
+            cloudGeo = new THREE.PlaneBufferGeometry(500,500);
+            cloudMaterial = new THREE.MeshLambertMaterial({
+                map: texture,
+                transparent: true
+            });
+            for(let p=0; p<15; p++) {
+                let cloud = new THREE.Mesh(cloudGeo,cloudMaterial);
+                cloud.position.set(
+                    Math.random()*1000 -500,
+                    -100,
+                    Math.random()* 600 - 500
+                );
+                cloud.rotation.x = 0;
+                //cloud.rotation.y = -0.12;
+                //  cloud.rotation.z = Math.random()*360;
+                cloud.material.opacity = 0.6;
+                cloudParticles.push(cloud);
+                scene.add(cloud);
+            }
+            animate();
+        });
+
+        window.addEventListener( 'resize', onWindowResize, false );
+
+        var matShader;
+        mat.onBeforeCompile = (shader) => {
+            shader.uniforms.time = { value: 0}
+            shader.vertexShader = `
+		        uniform float time;
+		    ` + shader.vertexShader
+
+            const token = '#include <begin_vertex>'
+            const customTransform = `
+		        vec3 transformed = vec3(position);
+		        float freq = 3.0;
+		        float amp = 0.1;
+		        float angle = (time + position.x)*freq;
+		        transformed.z += sin(angle)*amp;
+		        objectNormal = normalize(vec3(-amp * freq * cos(angle),0.0,1.0));
+                vNormal = normalMatrix * objectNormal;
+
+		`
+            shader.vertexShader = shader.vertexShader.replace(token,customTransform)
+            matShader = shader
+        }
+
+        // this function loads the context for the canvas
+        function initContext(canvasID, contextType) {
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext(contextType);
+            return context;
+        }
+
+        // this loads the image, but mainly, when the image loads, it calls readImage()
+        function loadImage(imageSource, context) {
+            var imageObj = new Image();
+            imageObj.onload = function() {
+                context.drawImage(imageObj, 0, 0);
+                // get image data samples each pixel from the first two  x,y coordinates
+                // to the latter two
+                var imageData = context.getImageData(0,0,planeSize,planeSize);
+                readImage(imageData);
+            };
+            imageObj.src = imageSource;
+        }
+
+        // since this method is only called when the image is loaded,
+        //we know we have the image pixel data
+        function readImage(imageData) {
+            // since the imageData.data looks like this [r0, g0, b0, a0, r1, g1, b1, a1…]
+            // and since our noise is greyscale (rgb are all the same number)
+            // we only need every fourth number to collect all the red values
+            var noiseData = [];
+            for(var i = 0; i < imageData.data.length; i+=4) {
+                noiseData.push(imageData.data[i]); // just saving red component
+            }
+
+            // now noiseData is a list of semi-random values from 0 to 255
+            // building generation code will go here:
+        }
+
+        var context = initContext('canvas','2d'); // initialize the canvas
+        loadImage('perlin_34_34.jpg',context); // load the perlin image
+
+
+
+
+    }
+
+    function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+        render();
+
+    }
+
+    function render() {
+
+        renderer.render( scene, camera );
+
+    }
+
+    function animate() {
+        cloudParticles.forEach(p => {
+            p.rotation.z -=.002;
+        });
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+    }
+
+</script>
+</body>
+</html>
