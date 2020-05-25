@@ -48,3 +48,11 @@ Link: https://drive.google.com/file/d/1UPk2U2i8zrD1JVfvGy1lgfQfUM3yoKb3/view?usp
 Partner check: <br />
 I did Part 1.<br />
 The part that I found most challenging was figuring out how to use the Shader Graph to manipulate the material in such a way to produce the intended effects that I wanted for my scene, such as the snowy mountain tops, or the snowy bushes. The part that I found most interesting was the Shader Graph itself. Being able to manipulate the shader by connecting nodes makes the entire process intuitive and easier to manipulate while also being able to see your changes in realtime.
+
+## Lab8
+![Image of Part2](https://i.imgur.com/iUOInfC.jpg)
+I wanted to make the whole picture more like a photographic work for example, all the inspiration images has mountains and some of the has water, so I combined the newly generated city with the terrain and the ocean from last lab. On the top of those, I added sky and fog effects to make city more realistic and dynamic.<br />
+* City's buildings' heights are generated randomly and their texture are decided by their heights for example, skyscrapers has a glass texture on them. 
+* Terrain and water are from last lab but increased their scales so they can be placed far away from city to create a distance view.
+* The sky is made by gradient background with two lighting objects, one is simulating sun's light, it is positioned as close to real life as possible by considering its distance and direction to the city. It mainly used to shine a light on buildings. The other one is for the fogs to create a dusk atmosphere, it set in the same poistion as sun light but its exposure range is set very wide so it can reflect on the fogs.
+* Fogs are made of a bunch of transparent fog images arranged unevenly accross the map.
