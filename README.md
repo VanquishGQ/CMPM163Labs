@@ -36,3 +36,15 @@ https://drive.google.com/file/d/1HQt_soB86Adcrh5yPmFFJOGrY3AIbXp_/view?usp=shari
 ### Part2
 ![Image of Part2](https://i.ibb.co/3y7mGWk/Screen-Shot-2020-05-12-at-7-07-41-PM.png)
 Link: https://www.shadertoy.com/view/WsBBzz
+
+## Lab7
+### Part2A
+![Image of Part2A](https://i.ibb.co/pdsNGJ5/Screen-Shot-2020-05-19-at-8-06-45-PM.png)
+![Image of Part2A](https://i.ibb.co/vLZRVYv/Screen-Shot-2020-05-19-at-8-07-05-PM.png)
+### Part2B
+Link: https://drive.google.com/file/d/1jq9pPNljYu5wrleeqdsPjCbLrunkbzFk/view?usp=sharing
+### Part2C
+Link: https://drive.google.com/file/d/1UPk2U2i8zrD1JVfvGy1lgfQfUM3yoKb3/view?usp=sharing <br />
+Partner check: <br />
+I did Part 1.<br />
+The part that I found most challenging was figuring out how to use the Shader Graph to manipulate the material in such a way to produce the intended effects that I wanted for my scene, such as the snowy mountain tops, or the snowy bushes. The part that I found most interesting was the Shader Graph itself. Being able to manipulate the shader by connecting nodes makes the entire process intuitive and easier to manipulate while also being able to see your changes in realtime.
