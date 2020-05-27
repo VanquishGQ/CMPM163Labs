@@ -55,4 +55,6 @@ I wanted to make the whole picture more like a photographic work for example, al
 * City's buildings' heights are generated randomly and their texture are decided by their heights for example, skyscrapers has a glass texture on them. 
 * Terrain and water are from last lab but increased their scales so they can be placed far away from city to create a distance view.
 * The sky is made by gradient background with two lighting objects, one is simulating sun's light, it is positioned as close to real life as possible by considering its distance and direction to the city. It mainly used to shine a light on buildings. The other one is for the fogs to create a dusk atmosphere, it set in the same poistion as sun light but its exposure range is set very wide so it can reflect on the fogs.
-* Fogs are made of a bunch of transparent fog images arranged unevenly accross the map.
+* Fogs are made of a bunch of transparent fog images arranged unevenly accross the map.<br />
+### Partner check:
+He used Unity's built-in noise map to get a range of values between 0-1 and manipulate those values to choose buildings of differing height to be placed in clusters. The same idea was applied for the grass tiles and the water tiles. Choosing the landscape was bit of an ordeal as he decided to randomly generate seeds until he found a landscape that he wanted to work with. His making process reminds me Minecraft which is really interesting to me. From his practice I think random seed can be a great tool to generate a random map.
