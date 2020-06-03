@@ -61,3 +61,5 @@ He used Unity's built-in noise map to get a range of values between 0-1 and mani
 
 ## Lab9
 ![Image of Lab9](https://i.imgur.com/o72LuBU.jpg)
+### My sequence
+![Image of Lab9](https://i.imgur.com/fFSz2sm.jpg)
